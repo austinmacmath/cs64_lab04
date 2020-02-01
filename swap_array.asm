@@ -139,7 +139,7 @@ main:
 
         jal printArray
         
-        # Do swap function 
+        # Do swap function
         jal doSwap
 
         # Print array "after"
@@ -166,24 +166,21 @@ main_exit:
 # COPYFROMHERE - DO NOT REMOVE THIS LINE
 
 doSwap:
-        # TODO: translate the following C code into MIPS
-        # assembly here.
-        # Use only regs $v0-$v1, $t0-$t7, $a0-$a3.
-        # You may assume nothing about their starting values.
-        #
-        #
-        # unsigned int x = 0
-        # unsigned int y = 8
-        #
-        # while (x != 4) {
-        #   int temp = myArray[x]
-        #   myArray[x] = myArray[y]
-        #   myArray[y] = temp
-        #   x++
-        #   y--
-        # }
+        la $t0, myArray
+        addiu $t1, $t0, 32
+        li $t7, 0
+myLoop:
+        lw $t2, 0($t0)
+        lw $t3 0($t1)
 
-        # TODO: fill in the code
+        sw $t2, 0($t1)
+        sw $t3, 0($t0)
 
+        addiu $t0, $t0, 4
+        addi $t7, $t7, 1
+        addiu $t1, $t1, -4
+
+        li $t4, 4
+        bne $t7, $t4, myLoop
         # do not remove this last line
         jr $ra
